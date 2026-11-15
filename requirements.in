@@ -1,0 +1,39 @@
+# Top-level dependencies. Edit this file, then re-lock:
+#   uv pip compile requirements.in --python-version 3.12 -o requirements.txt
+# Install:
+#   uv pip install -r requirements.txt
+
+# --- Agents / orchestration ---
+langchain
+langchain-core
+langgraph
+langgraph-checkpoint-postgres     # Postgres checkpointer (per-thread state)
+langchain-nvidia-ai-endpoints     # NVIDIA NIM hosted chat + embedding models
+langchain-mcp-adapters            # MCP tools -> LangChain tools
+
+# --- MCP (custom store-ops server + client) ---
+mcp
+
+# --- API / UI ---
+fastapi
+uvicorn[standard]
+streamlit
+httpx
+
+# --- Config / validation / runtime harness ---
+pydantic
+pydantic-settings
+tenacity                          # retries with backoff
+
+# --- Data layer ---
+psycopg[binary,pool]              # Postgres driver (also used by the checkpointer)
+pgvector                          # pgvector type adapters for psycopg
+
+# --- Data loading ---
+pandas                            # Olist CSVs
+datasets                          # Bitext from Hugging Face
+kagglehub                         # Olist download
+
+# --- Tracing (decide on Day 0; langsmith comes in with langchain) ---
+langsmith
+# langfuse                        # uncomment if Langfuse is chosen

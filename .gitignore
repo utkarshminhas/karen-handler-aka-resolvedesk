@@ -218,3 +218,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+/claude_docs
+# Raw datasets (Olist CC BY-NC-SA, Bitext CDLA-Sharing) — download via scripts, never commit
+/data/
+# Derived eval data (Bitext, CDLA-Sharing) — regenerate with scripts/prepare_bitext.py
+/evals/datasets/bitext_sample.jsonl

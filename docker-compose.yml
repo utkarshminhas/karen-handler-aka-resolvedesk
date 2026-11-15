@@ -1,0 +1,29 @@
+name: resolvedesk
+
+services:
+  postgres:
+    image: pgvector/pgvector:0.8.2-pg16
+    container_name: resolvedesk-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-resolvedesk}
+      POSTGRES_USER: ${POSTGRES_USER:-resolvedesk_admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+      # Used once by db/init/01_roles.sh to create the per-zone login roles
+      STORE_OPS_DB_PASSWORD: ${STORE_OPS_DB_PASSWORD:?set STORE_OPS_DB_PASSWORD in .env}
+      APP_DB_PASSWORD: ${APP_DB_PASSWORD:?set APP_DB_PASSWORD in .env}
+    ports:
+      # Host port defaults to 5433 so it doesn't clash with other local Postgres instances
+      - "${POSTGRES_PORT:-5433}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      # Runs only when the data volume is empty (first start)
+      - ./db/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  pgdata:
