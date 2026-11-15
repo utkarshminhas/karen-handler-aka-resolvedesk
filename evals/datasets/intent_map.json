@@ -1,0 +1,39 @@
+{
+  "labels": ["order_status", "refund", "product_qa", "out_of_scope"],
+  "map": {
+    "track_order": "order_status",
+    "delivery_period": "order_status",
+
+    "get_refund": "refund",
+    "track_refund": "refund",
+    "check_refund_policy": "refund",
+
+    "cancel_order": "out_of_scope",
+    "change_order": "out_of_scope",
+    "change_shipping_address": "out_of_scope",
+    "check_cancellation_fee": "out_of_scope",
+    "check_invoice": "out_of_scope",
+    "check_payment_methods": "out_of_scope",
+    "complaint": "out_of_scope",
+    "contact_customer_service": "out_of_scope",
+    "contact_human_agent": "out_of_scope",
+    "create_account": "out_of_scope",
+    "delete_account": "out_of_scope",
+    "delivery_options": "out_of_scope",
+    "edit_account": "out_of_scope",
+    "get_invoice": "out_of_scope",
+    "newsletter_subscription": "out_of_scope",
+    "payment_issue": "out_of_scope",
+    "place_order": "out_of_scope",
+    "recover_password": "out_of_scope",
+    "registration_problems": "out_of_scope",
+    "review": "out_of_scope",
+    "set_up_shipping_address": "out_of_scope",
+    "switch_account": "out_of_scope"
+  },
+  "notes": {
+    "product_qa": "Bitext has no product-question intent, so product_qa routing is covered only by the hand-written triage_context set.",
+    "contact_human_agent": "Mapped out_of_scope for scoring; at runtime an explicit request for a human should escalate. Revisit when escalation routing is built.",
+    "cancel_order": "Order cancellation is not a supported action in the PoC (refunds only)."
+  }
+}
